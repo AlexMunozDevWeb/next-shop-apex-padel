@@ -1,0 +1,20 @@
+name: next-shop
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: next-shop-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_DB: ${DB_NAME:-next-shop}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-next-shop}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
