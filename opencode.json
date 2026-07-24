@@ -6,7 +6,8 @@
       "command": ["npx", "@_davideast/stitch-mcp", "proxy"],
       "enabled": true,
       "environment": {
-        "STITCH_API_KEY": "{env:STITCH_API_KEY}"
+        "STITCH_API_KEY": "{env:STITCH_API_KEY}",
+        "STITCH_DEFAULT_PROJECT": "13605678766294868"
       }
     }
   }
