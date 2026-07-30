@@ -9,6 +9,11 @@
         "STITCH_API_KEY": "{env:STITCH_API_KEY}",
         "STITCH_DEFAULT_PROJECT": "13605678766294868"
       }
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
     }
   }
 }
