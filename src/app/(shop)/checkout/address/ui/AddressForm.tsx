@@ -9,7 +9,7 @@ import { Country } from '@/modules/country/domain'
 import { useAddressStore } from '@/modules/store'
 import { useRouter } from 'next/navigation'
 
-import { implementServerAddressController } from '@/modules/address/controller/AddressController'
+import { deleteUserAddressAction, setUserAddressAction } from '@/modules/address/controller/addressActions'
 
 interface FormInputs {
   firstName: string
@@ -30,8 +30,6 @@ interface Props {
 
 export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   const router = useRouter()
-
-  const { deleteUserAddress, setUserAddress } = implementServerAddressController()
 
   const {
     handleSubmit,
@@ -63,9 +61,9 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     setAddress(restAddress)
 
     if (rememberAddress) {
-      await setUserAddress(restAddress, session!.user.id)
+      await setUserAddressAction(restAddress, session!.user.id)
     } else {
-      await deleteUserAddress(session!.user.id)
+      await deleteUserAddressAction(session!.user.id)
     }
     router.push('/checkout')
   }
