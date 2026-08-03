@@ -1,6 +1,6 @@
 'use server'
 
-import type { Gender } from '@/generated/prisma'
+import type { Gender } from '@/generated/prisma/client'
 import { serverProductController } from './serverProductController'
 
 export const createUpdateProduct = async (formData: FormData) => {

@@ -1,6 +1,6 @@
 import { prisma } from '@/modules/shared/lib/prisma'
 import { v2 as cloudinary } from 'cloudinary'
-import { Gender, Product, Size } from '@/generated/prisma'
+import { Gender, Product, Size } from '@/generated/prisma/client'
 import { iProductRepository } from './iProductRepository'
 
 cloudinary.config(process.env.CLOUDINARY_URL ?? '')

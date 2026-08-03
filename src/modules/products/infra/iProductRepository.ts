@@ -1,4 +1,4 @@
-import type { Gender } from '@/generated/prisma'
+import type { Gender } from '@/generated/prisma/client'
 import type { PaginatedProductsResult, ProductResult, ProductWithImages } from '../domain'
 
 export interface iProductRepository {

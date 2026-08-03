@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
-import { Gender } from '@/generated/prisma'
+import { Gender } from '@/generated/prisma/client'
 import type { PaginatedProductsResult, ProductResult, ProductWithImages } from '../domain'
 import { iProductRepository, productRepository } from '../infra'
 

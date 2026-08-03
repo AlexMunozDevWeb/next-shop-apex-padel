@@ -1,4 +1,4 @@
-import type { Gender, Size as PrismaSize } from '@/generated/prisma'
+import type { Gender, Size as PrismaSize } from '@/generated/prisma/client'
 
 export type Size = PrismaSize
 
