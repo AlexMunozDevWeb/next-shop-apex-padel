@@ -1,7 +1,7 @@
 import { getProductoBySlug } from '@/modules/products/controller/productActions'
 import { Title } from '@/modules/shared/ui/components'
 import { redirect } from 'next/navigation'
-import { ProductForm } from './ui/ProductForm'
+import { ProductForm } from '../../../../../modules/products/ui/components/product/ProductForm'
 import { implementCategoryController } from '@/modules/category/controller/categoryController'
 
 interface Props {

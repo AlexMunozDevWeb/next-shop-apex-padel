@@ -1,5 +1,5 @@
 import { auth } from '@/auth.config'
-import { AddressForm } from './ui/AddressForm'
+import { AddressForm } from '../../../../modules/address/ui/components/AddressForm'
 import { implementServerCountryController } from '@/modules/country/controller/ServerCountryController'
 import { implementServerAddressController } from '@/modules/address/controller/AddressController'
 import { titleFont } from '@/modules/config/fonts'

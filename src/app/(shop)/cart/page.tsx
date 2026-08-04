@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ProductsInCart } from './ui/ProductsInCart'
-import { OrderSummary } from './ui/OrderSummary'
+import { ProductsInCart } from '@/modules/shared/ui/components/ProductsInCart'
+import { OrderSummary } from '@/modules/shared/ui/components/OrderSummary'
 import { titleFont } from '@/modules/config/fonts'
 import { IoArrowBackOutline, IoLockClosedOutline } from 'react-icons/io5'
 
