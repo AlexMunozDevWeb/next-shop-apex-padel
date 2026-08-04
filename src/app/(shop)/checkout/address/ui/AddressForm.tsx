@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect } from 'react'
 import clsx from 'clsx'
 import { useForm } from 'react-hook-form'
@@ -71,130 +72,129 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5"
+      className="border-surface-highest bg-surface-container space-y-6 rounded-2xl border p-6 shadow-xl"
     >
-      <div className="mb-2 flex flex-col">
-        <span>Nombres</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('firstName', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Apellidos</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('lastName', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Dirección</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('address', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Dirección 2 (opcional)</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('address2')}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Código postal</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('postalCode', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Ciudad</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('city', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>País</span>
-        <select
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('country', { required: true })}
-        >
-          <option value="">[ Seleccione ]</option>
-          {countries.map((country) => (
-            <option
-              key={country.id}
-              value={country.id}
-            >
-              {country.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mb-2 flex flex-col">
-        <span>Teléfono</span>
-        <input
-          type="text"
-          className="rounded-md border bg-gray-200 p-2"
-          {...register('phone', { required: true })}
-        />
-      </div>
-
-      <div className="mb-2 flex flex-col sm:mt-1">
-        <div className="mb-4 inline-flex items-center">
-          <label
-            className="relative flex cursor-pointer items-center rounded-full p-3"
-            htmlFor="checkbox"
-          >
-            <input
-              type="checkbox"
-              className="before:content[''] peer border-blue-gray-200 before:bg-blue-gray-500 relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-blue-500 checked:bg-blue-500 checked:before:bg-blue-500 hover:before:opacity-10"
-              id="checkbox"
-              {...register('rememberAddress')}
-              // checked
-            />
-            <div className="pointer-events-none absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-3.5 w-3.5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                stroke="currentColor"
-                strokeWidth="1"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </div>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Nombres
           </label>
-          <span>¿Recordar dirección?</span>
+          <input
+            type="text"
+            placeholder="Ej. Juan"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('firstName', { required: true })}
+          />
         </div>
+
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Apellidos
+          </label>
+          <input
+            type="text"
+            placeholder="Ej. Pérez"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('lastName', { required: true })}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-1.5 sm:col-span-2">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Dirección Principal
+          </label>
+          <input
+            type="text"
+            placeholder="Ej. Calle Principal 123, Piso 4B"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('address', { required: true })}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-1.5 sm:col-span-2">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Dirección Secundaria (Opcional)
+          </label>
+          <input
+            type="text"
+            placeholder="Ej. Edificio A, Puerta 2"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('address2')}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Código Postal
+          </label>
+          <input
+            type="text"
+            placeholder="Ej. 28001"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('postalCode', { required: true })}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">Ciudad</label>
+          <input
+            type="text"
+            placeholder="Ej. Madrid"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('city', { required: true })}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">País</label>
+          <select
+            className="border-surface-highest bg-surface-high text-on-surface focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('country', { required: true })}
+          >
+            <option value="">[ Seleccione País ]</option>
+            {countries.map((country) => (
+              <option
+                key={country.id}
+                value={country.id}
+              >
+                {country.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col space-y-1.5">
+          <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+            Teléfono de Contacto
+          </label>
+          <input
+            type="text"
+            placeholder="Ej. +34 600 000 000"
+            className="border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed rounded-xl border p-3 text-xs transition-colors focus:outline-none"
+            {...register('phone', { required: true })}
+          />
+        </div>
+      </div>
+
+      <div className="border-surface-highest flex flex-col space-y-4 border-t pt-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+        <label className="text-on-surface flex cursor-pointer items-center space-x-3 text-xs font-medium">
+          <input
+            type="checkbox"
+            className="border-surface-highest bg-surface-high text-primary-fixed accent-primary-fixed h-4 w-4 rounded"
+            {...register('rememberAddress')}
+          />
+          <span>¿Guardar como dirección habitual en mi perfil?</span>
+        </label>
+
         <button
           disabled={!isValid}
           type="submit"
-          className={clsx({
+          className={clsx('px-8 py-3.5 text-xs font-extrabold tracking-wider uppercase', {
             'btn-primary': isValid,
             'btn-disabled': !isValid,
           })}
         >
-          Siguiente
+          CONTINUAR AL RESUMEN
         </button>
       </div>
     </form>

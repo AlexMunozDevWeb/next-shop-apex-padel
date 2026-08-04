@@ -2,13 +2,13 @@ import { TopMenu, Sidebar, Footer } from '@/modules/components'
 
 export default function ShopLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main>
+    <div className="bg-surface text-on-surface flex min-h-screen flex-col">
       <TopMenu />
       <Sidebar />
 
-      <div className="px-0 sm:px-10">{children}</div>
+      <main className="w-full flex-1 pt-16 pb-24">{children}</main>
 
       <Footer />
-    </main>
+    </div>
   )
 }

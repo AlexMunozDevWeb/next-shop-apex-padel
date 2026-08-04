@@ -16,7 +16,7 @@
   --color-primary-fixed: #caf300;
   --color-on-primary-fixed: #171e00;
 
-  --color-outline-variant: #444932;
+  --color-outline-variant: #353534;
 
   --font-manrope: var(--font-manrope), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
@@ -73,25 +73,38 @@ h6,
   border-bottom: 1px solid rgba(53, 53, 52, 0.6);
 }
 
+/* Layout Utilities */
+.app-container {
+  @apply mx-auto max-w-7xl px-4 sm:px-8;
+}
+
+.hero-section-height {
+  min-height: 580px;
+}
+
+.category-hero-height {
+  height: 320px;
+}
+
 /* Stitch Design System Buttons (Dark Theme) */
 .btn-primary {
-  @apply inline-flex items-center justify-center rounded-xl bg-[#caf300] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#171e00] uppercase shadow-xl transition-all hover:bg-[#b0d500] active:scale-[0.98];
+  @apply bg-primary-fixed text-on-primary-fixed hover:bg-primary-fixed/90 inline-flex items-center justify-center rounded-xl px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider uppercase shadow-xl transition-all active:scale-[0.98];
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center rounded-xl bg-[#353534] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase shadow-md transition-all hover:bg-[#454747] active:scale-[0.98];
+  @apply bg-surface-highest hover:bg-surface-highest/80 inline-flex items-center justify-center rounded-xl px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase shadow-md transition-all active:scale-[0.98];
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-xl border border-[#353534] bg-transparent px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#e5e2e1] uppercase transition-all hover:border-[#caf300] hover:text-[#caf300] active:scale-[0.98];
+  @apply border-surface-highest text-on-surface hover:border-primary-fixed hover:text-primary-fixed inline-flex items-center justify-center rounded-xl border bg-transparent px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider uppercase transition-all active:scale-[0.98];
 }
 
 .btn-disabled {
-  @apply pointer-events-none inline-flex cursor-not-allowed items-center justify-center rounded-xl bg-[#201f1f] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#454747] uppercase;
+  @apply bg-surface-container text-surface-highest pointer-events-none inline-flex cursor-not-allowed items-center justify-center rounded-xl px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider uppercase;
 }
 
 .btn-danger {
-  @apply inline-flex items-center justify-center rounded-xl bg-[#93000a] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase transition-all hover:bg-[#690005] active:scale-[0.98];
+  @apply inline-flex items-center justify-center rounded-xl bg-red-800 px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase transition-all hover:bg-red-900 active:scale-[0.98];
 }
 
 /* Custom Scrollbar */

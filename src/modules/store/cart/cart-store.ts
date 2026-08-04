@@ -1,5 +1,6 @@
 'use client'
 import { CartProduct } from '@/modules/products/domain'
+import { TAX_RATE } from '@/modules/order/domain'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -9,7 +10,7 @@ interface State {
   getSummaryInformation: () => { subTotal: number; tax: number; total: number; itemsInCart: number }
 
   addProductToCart: (product: CartProduct) => void
-  updateProductQuatity: (product: CartProduct, quantity: number) => void
+  updateProductQuantity: (product: CartProduct, quantity: number) => void
   removeProduct: (product: CartProduct) => void
 
   clearCart: () => void
@@ -28,7 +29,7 @@ export const useCartStore = create<State>()(
       getSummaryInformation: () => {
         const { cart } = get()
         const subTotal = cart.reduce((subTotal, product) => product.quantity * product.price + subTotal, 0)
-        const tax = subTotal * 0.15
+        const tax = subTotal * TAX_RATE
         const total = subTotal + tax
         const itemsInCart = cart.reduce((total, item) => total + item.quantity, 0)
         return {
@@ -59,7 +60,7 @@ export const useCartStore = create<State>()(
         })
         set({ cart: updatedCartProduct })
       },
-      updateProductQuatity: (product: CartProduct, quantity: number) => {
+      updateProductQuantity: (product: CartProduct, quantity: number) => {
         const { cart } = get()
         const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {

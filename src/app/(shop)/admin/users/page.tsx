@@ -1,11 +1,8 @@
 export const revalidate = 0
 
-// https://tailwindcomponents.com/component/hoverable-table
 import { Pagination, Title } from '@/modules/components'
-
 import { redirect } from 'next/navigation'
 import { UsersTable } from './ui/UsersTable'
-
 import { serverUserController } from '@/modules/user/controller/serverUserController'
 
 interface Props {
@@ -14,7 +11,7 @@ interface Props {
 
 const PAGE_SIZE = 10
 
-export default async function OrdersPage({ searchParams }: Props) {
+export default async function AdminUsersPage({ searchParams }: Props) {
   const { page: pageParam } = await searchParams
   const page = Number(pageParam) || 1
 
@@ -35,17 +32,16 @@ export default async function OrdersPage({ searchParams }: Props) {
   const totalPages = Math.ceil(total / PAGE_SIZE)
 
   return (
-    <>
+    <div className="space-y-6 pb-16">
       <Title
-        className=""
-        title="Mantenimiento de usuarios"
+        title="Gestión de Usuarios"
+        subtitle="Administra los permisos y roles de los usuarios registrados."
+        className="my-0"
       />
 
-      <div className="mb-10">
-        <UsersTable users={users} />
+      <UsersTable users={users} />
 
-        <Pagination totalPages={totalPages} />
-      </div>
-    </>
+      <Pagination totalPages={totalPages} />
+    </div>
   )
 }

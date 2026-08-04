@@ -21,7 +21,7 @@ export default function RootLayout({
       lang="es"
       className={`dark h-full antialiased ${mainFont.variable} ${titleFont.variable}`}
     >
-      <body className={`${titleFont.className} text-on-surface flex min-h-full flex-col bg-[#131313]`}>
+      <body className={`${titleFont.className} text-on-surface bg-surface flex min-h-full flex-col`}>
         <Providers>{children}</Providers>
       </body>
     </html>

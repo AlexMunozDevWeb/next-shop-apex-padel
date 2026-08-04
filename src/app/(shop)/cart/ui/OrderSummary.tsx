@@ -14,23 +14,33 @@ export const OrderSummary = () => {
 
   const { itemsInCart, subTotal, tax, total } = useCartStore(useShallow((state) => state.getSummaryInformation()))
 
-  if (!loaded) return <p>Loading...</p>
+  if (!loaded) return <div className="bg-surface-container h-28 animate-pulse rounded-xl" />
 
   return (
-    <>
-      <div className="grid grid-cols-2">
-        <span>No. Productos</span>
-        <span className="text-right">{itemsInCart === 1 ? '1 articulo' : `${itemsInCart} articulos`}</span>
-
-        <span>Subtotal</span>
-        <span className="text-right">{currencyFormat(subTotal)}</span>
-
-        <span>Impuestos (15%)</span>
-        <span className="text-right">{currencyFormat(tax)}</span>
-
-        <span className="mt-5 text-2xl">Total:</span>
-        <span className="mt-5 text-right text-2xl">{currencyFormat(total)}</span>
+    <div className="space-y-3.5 text-xs">
+      <div className="text-on-surface-variant flex justify-between">
+        <span>Subtotal ({itemsInCart} artículos):</span>
+        <span className="font-semibold text-white">{currencyFormat(subTotal)}</span>
       </div>
-    </>
+
+      <div className="text-on-surface-variant flex justify-between">
+        <span>Envío Express:</span>
+        <span className="text-primary-fixed font-extrabold uppercase">GRATIS</span>
+      </div>
+
+      <div className="text-on-surface-variant flex justify-between">
+        <span>Impuestos Estimados (IVA):</span>
+        <span className="font-semibold text-white">{currencyFormat(tax)}</span>
+      </div>
+
+      <div className="bg-surface-highest my-2 h-px w-full" />
+
+      <div className="flex items-end justify-between pt-1">
+        <div>
+          <p className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">Total a Pagar</p>
+          <p className="text-on-surface text-2xl font-black">{currencyFormat(total)}</p>
+        </div>
+      </div>
+    </div>
   )
 }

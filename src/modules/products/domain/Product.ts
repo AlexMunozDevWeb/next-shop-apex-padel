@@ -9,7 +9,7 @@ export type PaginationOptions = {
 }
 
 export type PaginatedProductsResult = {
-  currtentPage: number
+  currentPage: number
   totalPages: number
   products: ProductWithImages[]
 }

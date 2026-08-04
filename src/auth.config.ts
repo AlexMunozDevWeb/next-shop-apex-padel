@@ -10,19 +10,7 @@ export const authConfig: NextAuthConfig = {
     newUser: '/auth/new-account',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      // TODO: Mirar documentación de next y hacerla funcionar con el proxy.ts
-      console.log('authorized: ')
-      console.log({ auth })
-
-      // const isLoggedIn = !!auth?.user
-      // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
-      // if (isOnDashboard) {
-      //   if (isLoggedIn) return true
-      //   return false // Redirect unauthenticated users to login page
-      // } else if (isLoggedIn) {
-      //   return Response.redirect(new URL('/dashboard', nextUrl))
-      // }
+    authorized() {
       return true
     },
     jwt({ token, user }) {

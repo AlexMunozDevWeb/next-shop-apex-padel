@@ -1,4 +1,5 @@
 'use client'
+
 import { generatePaginationNumbers } from '@/modules/shared/utils'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -13,20 +14,19 @@ export const Pagination = ({ totalPages }: Props) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const pageString = searchParams.get('page') ?? 1
+  const pageString = searchParams.get('page') ?? '1'
+  const currentPage = isNaN(+pageString) ? 1 : +pageString
 
-  const currtentPage = isNaN(+pageString) ? 1 : +pageString
-
-  if (currtentPage < 1 || isNaN(+pageString)) {
+  if (currentPage < 1 || isNaN(+pageString)) {
     redirect(pathname)
   }
 
-  const allPages = generatePaginationNumbers(currtentPage, totalPages)
+  const allPages = generatePaginationNumbers(currentPage, totalPages)
 
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams)
     if (pageNumber === '...') {
-      return `${pathname}${params.toString()}`
+      return `${pathname}?${params.toString()}`
     }
     if (+pageNumber <= 0) {
       return `${pathname}`
@@ -38,29 +38,32 @@ export const Pagination = ({ totalPages }: Props) => {
     return `${pathname}?${params.toString()}`
   }
 
+  if (totalPages <= 1) return null
+
   return (
-    <div className="mt-10 mb-32 flex justify-center text-center">
-      <nav aria-label="Page navigation example">
-        <ul className="list-style-none flex">
-          <li className="page-item">
+    <div className="mt-10 mb-12 flex justify-center text-center">
+      <nav aria-label="Navegación de páginas">
+        <ul className="flex items-center space-x-1">
+          <li>
             <Link
-              className="page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 transition-all duration-300 outline-none hover:bg-gray-200 hover:text-gray-800 focus:shadow-none"
-              href={createPageUrl(currtentPage - 1)}
-              aria-disabled="true"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#e3e2e7] bg-white text-[#1a1b1f] transition-all hover:bg-black hover:text-[#c1f100]"
+              href={createPageUrl(currentPage - 1)}
+              aria-label="Página anterior"
             >
-              <IoChevronBackOutline size={30} />
+              <IoChevronBackOutline className="h-4 w-4" />
             </Link>
           </li>
-          {allPages.map((page) => (
-            <li
-              key={page}
-              className="page-item"
-            >
+
+          {allPages.map((page, idx) => (
+            <li key={idx}>
               <Link
                 className={clsx(
-                  'page-link relative block rounded border-0 px-3 py-1.5 text-gray-800 transition-all duration-300 outline-none hover:bg-gray-200 hover:text-gray-800 focus:shadow-none',
+                  'flex h-10 min-w-[40px] items-center justify-center rounded-lg px-3 text-xs font-bold transition-all',
                   {
-                    'bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:text-white': page === currtentPage,
+                    'bg-black text-[#c1f100] shadow-sm': page === currentPage,
+                    'border border-[#e3e2e7] bg-white text-[#1a1b1f] hover:bg-[#f4f3f8]':
+                      page !== currentPage && page !== '...',
+                    'pointer-events-none text-[#4c4546]': page === '...',
                   }
                 )}
                 href={createPageUrl(page)}
@@ -69,12 +72,14 @@ export const Pagination = ({ totalPages }: Props) => {
               </Link>
             </li>
           ))}
-          <li className="page-item">
+
+          <li>
             <Link
-              className="page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 transition-all duration-300 outline-none hover:bg-gray-200 hover:text-gray-800 focus:shadow-none"
-              href={createPageUrl(currtentPage + 1)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#e3e2e7] bg-white text-[#1a1b1f] transition-all hover:bg-black hover:text-[#c1f100]"
+              href={createPageUrl(currentPage + 1)}
+              aria-label="Página siguiente"
             >
-              <IoChevronForwardOutline size={30} />
+              <IoChevronForwardOutline className="h-4 w-4" />
             </Link>
           </li>
         </ul>

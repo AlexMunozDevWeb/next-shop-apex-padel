@@ -19,7 +19,3 @@ const AddressController = (api: iAddressRepository): iAddressController => ({
 export const implementServerAddressController = (): iAddressController => {
   return AddressController(addressRepository)
 }
-
-export const useClientAddressController = (api: iAddressRepository): iAddressController => {
-  return AddressController(api)
-}

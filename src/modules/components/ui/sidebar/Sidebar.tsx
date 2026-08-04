@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import clsx from 'clsx'
@@ -15,132 +16,192 @@ import {
 
 import { useUIStore } from '@/modules/store'
 import { logout } from '@/modules/auth/controller/authActions'
+import { titleFont } from '@/modules/config/fonts'
 
 export const Sidebar = () => {
   const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen)
   const closeMenu = useUIStore((state) => state.closeSideMenu)
 
   const { data: session } = useSession()
-  console.log({ session })
 
   const isAuthenticated = !!session?.user
   const isAdmin = session?.user.role === 'admin'
 
   return (
     <div>
-      {/* Background black */}
-      {isSideMenuOpen && <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-black opacity-30" />}
-
-      {/* Blur */}
+      {/* Dark Backdrop */}
       {isSideMenuOpen && (
         <div
           onClick={closeMenu}
-          className="fade-in fixed top-0 left-0 z-10 h-screen w-screen backdrop-blur-sm backdrop-filter"
+          className="fade-in fixed inset-0 z-50 bg-black/70 backdrop-blur-md transition-opacity"
         />
       )}
-      {/* Sidemenu */}
+
+      {/* Sidemenu Drawer */}
       <nav
         className={clsx(
-          'fixed top-0 right-0 z-20 h-screen w-[500px] transform bg-white p-5 shadow-2xl transition-all duration-300',
+          'border-surface-highest bg-surface-lowest text-on-surface fixed top-0 right-0 z-50 flex h-screen w-full max-w-sm flex-col justify-between border-l p-6 shadow-2xl transition-transform duration-300 ease-in-out',
           {
             'translate-x-full': !isSideMenuOpen,
           }
         )}
       >
-        <IoCloseOutline
-          size={50}
-          className="absolute top-5 right-5 cursor-pointer"
-          onClick={() => closeMenu()}
-        />
-
-        {/* Input */}
-        <div className="relative mt-14">
-          <IoSearchOutline
-            size={20}
-            className="absolute top-2 left-2"
-          />
-          <input
-            type="text"
-            placeholder="Buscar"
-            className="w-full rounded border-b-2 border-gray-200 bg-gray-50 py-1 pr-10 pl-10 text-xl focus:border-blue-500 focus:outline-none"
-          />
-        </div>
-
-        {/* Menú */}
-        {isAuthenticated && (
-          <>
-            <Link
-              href="/profile"
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-              onClick={closeMenu}
-            >
-              <IoPersonOutline size={30} />
-              <span className="ml-3 text-xl">Perfil</span>
-            </Link>
-
-            <Link
-              href="/orders"
-              onClick={() => closeMenu()}
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-            >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Ordenes</span>
-            </Link>
+        <div>
+          {/* Header */}
+          <div className="border-surface-highest flex items-center justify-between border-b pb-5">
             <Link
               href="/"
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-              onClick={() => logout()}
+              onClick={closeMenu}
+              className="flex items-center space-x-2"
             >
-              <IoLogOutOutline size={30} />
-              <span className="ml-3 text-xl">Salir</span>
+              <div className="bg-primary-fixed text-on-primary-fixed flex h-7 w-7 items-center justify-center rounded">
+                <span className={`${titleFont.className} text-sm font-black`}>A</span>
+              </div>
+              <span className={`${titleFont.className} text-base font-extrabold tracking-tight text-white`}>
+                APEX <span className="text-primary-fixed">STORE</span>
+              </span>
             </Link>
-          </>
-        )}
 
-        {!isAuthenticated && (
-          <Link
-            href="/auth/login"
-            className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-            onClick={() => closeMenu()}
-          >
-            <IoLogInOutline size={30} />
-            <span className="ml-3 text-xl">Ingresar</span>
-          </Link>
-        )}
-
-        {isAdmin && (
-          <>
-            {/* Line Separator */}
-            <div className="my-10 h-px w-full bg-gray-200" />
-
-            <Link
-              href="/admin/products"
+            <button
               onClick={() => closeMenu()}
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
+              className="border-surface-highest flex h-9 w-9 items-center justify-center rounded-lg border text-neutral-400 transition-colors hover:text-white"
+              aria-label="Cerrar"
             >
-              <IoShirtOutline size={30} />
-              <span className="ml-3 text-xl">Productos</span>
-            </Link>
+              <IoCloseOutline className="h-6 w-6" />
+            </button>
+          </div>
 
-            <Link
-              href="/admin/orders"
-              onClick={() => closeMenu()}
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-            >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Ordenes</span>
-            </Link>
+          {/* Search Input */}
+          <div className="relative mt-6">
+            <IoSearchOutline className="text-on-surface-variant absolute top-3.5 left-3.5 h-4 w-4" />
+            <input
+              type="text"
+              placeholder="Buscar palas, calzado, ropa..."
+              className="border-surface-highest bg-surface-low text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed w-full rounded-xl border py-2.5 pr-4 pl-10 text-xs focus:outline-none"
+            />
+          </div>
 
-            <Link
-              href="/admin/users"
-              onClick={() => closeMenu()}
-              className="mt-10 flex items-center rounded p-2 transition-all hover:bg-gray-100"
-            >
-              <IoPeopleOutline size={30} />
-              <span className="ml-3 text-xl">Usuarios</span>
-            </Link>
-          </>
-        )}
+          {/* Navigation Links */}
+          <div className="mt-8 space-y-6">
+            <div>
+              <span className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+                Categorías
+              </span>
+              <div className="mt-2 flex flex-col space-y-1">
+                <Link
+                  href="/gender/men"
+                  onClick={closeMenu}
+                  className="text-primary-fixed hover:bg-surface-container rounded-lg px-3 py-2 text-base font-extrabold transition-all"
+                >
+                  Hombre
+                </Link>
+                <Link
+                  href="/gender/women"
+                  onClick={closeMenu}
+                  className="text-on-surface hover:bg-surface-container hover:text-primary-fixed rounded-lg px-3 py-2 text-base font-extrabold transition-all"
+                >
+                  Mujer
+                </Link>
+                <Link
+                  href="/gender/kid"
+                  onClick={closeMenu}
+                  className="text-on-surface hover:bg-surface-container hover:text-primary-fixed rounded-lg px-3 py-2 text-base font-extrabold transition-all"
+                >
+                  Junior
+                </Link>
+              </div>
+            </div>
+
+            <div className="border-surface-highest border-t pt-4">
+              <span className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+                Usuario
+              </span>
+              <div className="mt-2 flex flex-col space-y-1">
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      href="/profile"
+                      className="text-on-surface hover:bg-surface-container hover:text-primary-fixed flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition-all"
+                      onClick={closeMenu}
+                    >
+                      <IoPersonOutline className="h-5 w-5" />
+                      <span>Mi Cuenta</span>
+                    </Link>
+
+                    <Link
+                      href="/orders"
+                      onClick={closeMenu}
+                      className="text-on-surface hover:bg-surface-container hover:text-primary-fixed flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition-all"
+                    >
+                      <IoTicketOutline className="h-5 w-5" />
+                      <span>Mis Pedidos</span>
+                    </Link>
+
+                    <button
+                      className="flex w-full items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-red-400 transition-all hover:bg-red-950/40"
+                      onClick={() => {
+                        closeMenu()
+                        logout()
+                      }}
+                    >
+                      <IoLogOutOutline className="h-5 w-5" />
+                      <span>Cerrar Sesión</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/auth/login"
+                    className="bg-primary-fixed text-on-primary-fixed hover:bg-primary-fixed/90 flex items-center space-x-3 rounded-xl px-4 py-3 text-sm font-extrabold transition-all"
+                    onClick={closeMenu}
+                  >
+                    <IoLogInOutline className="h-5 w-5" />
+                    <span>Iniciar Sesión</span>
+                  </Link>
+                )}
+
+                {isAdmin && (
+                  <>
+                    <div className="border-surface-highest my-3 border-t" />
+                    <span className="text-primary-fixed text-[10px] font-extrabold tracking-widest uppercase">
+                      Administración
+                    </span>
+
+                    <Link
+                      href="/admin/products"
+                      onClick={closeMenu}
+                      className="text-on-surface hover:bg-surface-container flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-all"
+                    >
+                      <IoShirtOutline className="h-5 w-5" />
+                      <span>Productos</span>
+                    </Link>
+
+                    <Link
+                      href="/admin/orders"
+                      onClick={closeMenu}
+                      className="text-on-surface hover:bg-surface-container flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-all"
+                    >
+                      <IoTicketOutline className="h-5 w-5" />
+                      <span>Pedidos</span>
+                    </Link>
+
+                    <Link
+                      href="/admin/users"
+                      onClick={closeMenu}
+                      className="text-on-surface hover:bg-surface-container flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-all"
+                    >
+                      <IoPeopleOutline className="h-5 w-5" />
+                      <span>Usuarios</span>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-surface-highest text-on-surface-variant border-t pt-4 text-center text-xs">
+          Apex Padel Store v2.0 • Pro Performance
+        </div>
       </nav>
     </div>
   )

@@ -12,11 +12,10 @@ interface Props {
 export const PayPalButton = ({ orderId, amount }: Props) => {
   const [{ isPending }] = usePayPalScriptReducer()
 
-  const rountedAmount = Math.round(amount * 100) / 100 //123.23
+  const roundedAmount = Math.round(amount * 100) / 100
 
   if (isPending) {
     return (
-      // TODO: hacer skeleton
       <div className="mb-16 animate-pulse">
         <div className="h-11 rounded bg-gray-300" />
         <div className="mt-2 h-11 rounded bg-gray-300" />
@@ -31,8 +30,8 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
         {
           invoice_id: orderId,
           amount: {
-            currency_code: 'USD',
-            value: `${rountedAmount}`,
+            currency_code: 'EUR',
+            value: `${roundedAmount}`,
           },
         },
       ],
@@ -49,15 +48,11 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
   const onApprove = async (data: OnApproveData, actions: OnApproveActions) => {
     const details = await actions.order?.capture()
 
-    console.log('onApprove')
-    console.log({ details })
-
     if (!details || !details.id) return
     await paypalCheckPayment(details.id)
   }
 
   return (
-    // TODO: Fix: no esta aplicando el z-0
     <div className="relative z-0">
       <PayPalButtons
         createOrder={createOrder}

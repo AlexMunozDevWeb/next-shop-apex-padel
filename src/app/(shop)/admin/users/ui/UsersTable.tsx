@@ -11,50 +11,54 @@ export const UsersTable = ({ users }: Props) => {
   const { changeUserRole } = useUserController()
 
   return (
-    <table className="min-w-full">
-      <thead className="border-b bg-gray-200">
-        <tr>
-          <th
-            scope="col"
-            className="px-6 py-4 text-left text-sm font-medium text-gray-900"
-          >
-            Email
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-4 text-left text-sm font-medium text-gray-900"
-          >
-            Nombre completo
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-4 text-left text-sm font-medium text-gray-900"
-          >
-            Role
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map((user) => (
-          <tr
-            key={user.id}
-            className="border-b bg-white transition duration-300 ease-in-out hover:bg-gray-100"
-          >
-            <td className="px-6 py-4 text-sm font-medium whitespace-nowrap text-gray-900">{user.email}</td>
-            <td className="px-6 py-4 text-sm font-light whitespace-nowrap text-gray-900">{user.name}</td>
-            <td className="flex items-center px-6 py-4 text-sm font-light whitespace-nowrap text-gray-900">
-              <select
-                value={user.role}
-                onChange={(e) => changeUserRole(user.id, e.target.value)}
-                className="w-full p-2 text-sm text-gray-900"
+    <div className="overflow-hidden rounded-2xl border border-[#e3e2e7] bg-white shadow-sm">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-[#e3e2e7] bg-[#f4f3f8] tracking-wider text-[#4c4546] uppercase">
+            <tr>
+              <th
+                scope="col"
+                className="px-6 py-4 font-extrabold"
               >
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-              </select>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                Correo Electrónico
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-4 font-extrabold"
+              >
+                Nombre Completo
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-4 font-extrabold"
+              >
+                Rol Asignado
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#f4f3f8]">
+            {users.map((user) => (
+              <tr
+                key={user.id}
+                className="transition-colors hover:bg-[#faf8fe]"
+              >
+                <td className="px-6 py-4 font-medium text-[#1a1b1f]">{user.email}</td>
+                <td className="px-6 py-4 font-bold text-[#1a1b1f]">{user.name}</td>
+                <td className="px-6 py-3">
+                  <select
+                    value={user.role}
+                    onChange={(e) => changeUserRole(user.id, e.target.value)}
+                    className="rounded-lg border border-[#e3e2e7] bg-white px-3 py-1.5 text-xs font-bold text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+                  >
+                    <option value="admin">Administrador</option>
+                    <option value="user">Cliente (User)</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   )
 }

@@ -152,7 +152,7 @@ export const productRepository: iProductRepository = {
     const totalPages = Math.ceil(totalCount / take)
 
     return {
-      currtentPage: page,
+      currentPage: page,
       totalPages,
       products: products.map(({ ProductImage, ...product }) => ({
         ...product,

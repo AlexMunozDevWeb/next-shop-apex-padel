@@ -1,10 +1,8 @@
 import { auth } from '@/auth.config'
-
-import { Title } from '@/modules/components'
 import { AddressForm } from './ui/AddressForm'
-
 import { implementServerCountryController } from '@/modules/country/controller/ServerCountryController'
 import { implementServerAddressController } from '@/modules/address/controller/AddressController'
+import { titleFont } from '@/modules/config/fonts'
 
 export default async function AddressPage() {
   const { getCountries } = implementServerCountryController()
@@ -13,26 +11,36 @@ export default async function AddressPage() {
   const session = await auth()
 
   if (!session?.user) {
-    return <h3 className="text-5xl">500 - No hay sesión de usuario.</h3>
+    return (
+      <div className="app-container text-on-surface py-16 text-center">
+        <h3 className="text-2xl font-bold">500 - No hay sesión de usuario activa.</h3>
+      </div>
+    )
   }
 
   const { getUserAddress } = implementServerAddressController()
   const userAddress = (await getUserAddress(session.user.id)) ?? undefined
 
   return (
-    <div className="mb-72 flex flex-col px-10 sm:items-center sm:justify-center sm:px-0">
-      <div className="flex w-full flex-col justify-center text-left xl:w-[1000px]">
-        <Title
-          className=""
-          title="Dirección"
-          subtitle="Dirección de entrega"
-        />
+    <div className="app-container space-y-8 pb-16">
+      {/* Progress Stepper */}
+      <div className="border-surface-highest/50 flex items-center justify-between border-b pb-4">
+        <div className="flex flex-col gap-1">
+          <span className="text-primary-fixed text-[10px] font-extrabold tracking-widest uppercase">PASO 02 DE 03</span>
+          <h1 className={`${titleFont.className} text-2xl font-black text-white sm:text-3xl`}>Dirección de Entrega</h1>
+        </div>
 
-        <AddressForm
-          countries={countries}
-          userStoredAddress={userAddress}
-        />
+        <div className="flex gap-2">
+          <div className="bg-primary-fixed h-1.5 w-8 rounded-full" />
+          <div className="bg-primary-fixed h-1.5 w-8 rounded-full" />
+          <div className="bg-surface-highest h-1.5 w-8 rounded-full" />
+        </div>
       </div>
+
+      <AddressForm
+        countries={countries}
+        userStoredAddress={userAddress}
+      />
     </div>
   )
 }

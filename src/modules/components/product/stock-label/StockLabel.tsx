@@ -1,7 +1,6 @@
 'use client'
-import { mainFont } from '@/modules/config/fonts'
-import { useEffect, useState } from 'react'
 
+import { useEffect, useState } from 'react'
 import { getStockBySlug } from '@/modules/products/controller/productActions'
 
 interface Props {
@@ -21,13 +20,23 @@ export const StockLabel = ({ slug }: Props) => {
     getStock()
   }, [slug])
 
+  if (isLoading) {
+    return <div className="h-6 w-28 animate-pulse rounded-md bg-[#eeedf3]" />
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <h1 className={`${mainFont.className} animate-pulse bg-gray-100 text-lg font-bold antialiased`}>&nbsp;</h1>
-      ) : (
-        <h1 className={`${mainFont.className} text-lg font-bold antialiased`}>Stock: {stock}</h1>
-      )}
-    </>
+    <div className="inline-flex items-center space-x-2">
+      <span className="relative flex h-2 w-2">
+        <span
+          className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${
+            stock > 0 ? 'bg-[#506600]' : 'bg-red-400'
+          }`}
+        />
+        <span className={`relative inline-flex h-2 w-2 rounded-full ${stock > 0 ? 'bg-[#506600]' : 'bg-red-500'}`} />
+      </span>
+      <span className="text-xs font-semibold text-[#4c4546]">
+        {stock > 0 ? `Stock Disponible: ${stock} unidades` : 'Agotado Temporalmente'}
+      </span>
+    </div>
   )
 }

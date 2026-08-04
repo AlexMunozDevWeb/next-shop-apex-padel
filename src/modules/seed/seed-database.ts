@@ -1,5 +1,4 @@
 import { initialData } from './seed'
-// import { countries } from './seed-countries'
 import { prisma } from '../shared/lib/prisma'
 import { countries } from './seed-countries'
 

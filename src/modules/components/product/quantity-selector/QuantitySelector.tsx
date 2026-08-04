@@ -1,5 +1,6 @@
 'use client'
-import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5'
+
+import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5'
 
 interface Props {
   quantity: number
@@ -13,13 +14,24 @@ export const QuantitySelector = ({ quantity, onQuantityChanged }: Props) => {
   }
 
   return (
-    <div className="flex">
-      <button onClick={() => onValueChanged(-1)}>
-        <IoRemoveCircleOutline size={30} />
+    <div className="border-surface-highest bg-surface-high flex items-center rounded-xl border p-1">
+      <button
+        onClick={() => onValueChanged(-1)}
+        className="text-on-surface hover:bg-surface-highest flex h-10 w-10 items-center justify-center rounded-lg transition-transform active:scale-90 disabled:opacity-30"
+        disabled={quantity <= 1}
+        aria-label="Disminuir"
+      >
+        <IoRemoveOutline className="h-4 w-4" />
       </button>
-      <span className="mx-3 w-20 rounded bg-gray-100 px-5 text-center">{quantity}</span>
-      <button onClick={() => onValueChanged(+1)}>
-        <IoAddCircleOutline size={30} />
+
+      <span className="w-10 text-center text-sm font-extrabold text-white">{quantity}</span>
+
+      <button
+        onClick={() => onValueChanged(1)}
+        className="text-on-surface hover:bg-surface-highest flex h-10 w-10 items-center justify-center rounded-lg transition-transform active:scale-90"
+        aria-label="Aumentar"
+      >
+        <IoAddOutline className="h-4 w-4" />
       </button>
     </div>
   )

@@ -7,6 +7,8 @@ import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useState, useSyncExternalStore } from 'react'
 import { useShallow } from 'zustand/shallow'
+import { titleFont } from '@/modules/config/fonts'
+import { IoCheckmarkCircleOutline, IoLocationOutline, IoLockClosedOutline } from 'react-icons/io5'
 
 export const PlaceOrder = () => {
   const router = useRouter()
@@ -17,7 +19,6 @@ export const PlaceOrder = () => {
   const cart = useCartStore((state) => state.cart)
   const clearCart = useCartStore((state) => state.clearCart)
 
-  // Fixes hydration problems
   const loaded = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -34,10 +35,7 @@ export const PlaceOrder = () => {
       size: product.size,
     }))
 
-    //! Server action
     const resp = await placeOrder(productsToOrder, address)
-    console.log('Respuesta: ')
-    console.log(resp)
 
     if (!resp.ok) {
       setIsPlacingOrder(false)
@@ -45,80 +43,104 @@ export const PlaceOrder = () => {
       return
     }
 
-    //* Todo salio bien!
     clearCart()
     router.replace('/orders/' + resp.order?.id)
   }
 
   if (!loaded) {
-    return <p>Loading...</p>
+    return <div className="bg-surface-container h-96 animate-pulse rounded-2xl" />
   }
 
   return (
-    <div className="rounded-xl bg-white p-7 shadow-xl">
-      <h2 className="mb-2 text-2xl">Dirección de entrega</h2>
-      <div className="mb-10">
-        <p className="text-xl">
-          {address.firstName} {address.lastName}
-        </p>
-        <p>{address.address}</p>
-        <p>{address.address2}</p>
-        <p>{address.postalCode}</p>
-        <p>
-          {address.city}, {address.country}{' '}
-        </p>
-        <p>{address.phone}</p>
+    <div className="border-surface-highest bg-surface-container space-y-6 rounded-2xl border p-6 shadow-xl">
+      {/* Shipping Address Section */}
+      <div>
+        <div className="border-surface-highest flex items-center space-x-2 border-b pb-3">
+          <IoLocationOutline className="text-primary-fixed h-5 w-5" />
+          <h2 className={`${titleFont.className} text-base font-extrabold text-white`}>Dirección de Entrega</h2>
+        </div>
+
+        <div className="text-on-surface-variant mt-3 space-y-1 text-xs">
+          <p className="text-sm font-bold text-white">
+            {address.firstName} {address.lastName}
+          </p>
+          <p>{address.address}</p>
+          {address.address2 && <p>{address.address2}</p>}
+          <p>
+            {address.postalCode} - {address.city}, {address.country}
+          </p>
+          <p className="text-primary-fixed font-semibold">Tel: {address.phone}</p>
+        </div>
       </div>
 
-      {/* Divider */}
-      <div className="mb-10 h-0.5 w-full rounded bg-gray-200" />
+      {/* Summary Section */}
+      <div>
+        <div className="border-surface-highest flex items-center space-x-2 border-b pb-3">
+          <IoCheckmarkCircleOutline className="text-primary-fixed h-5 w-5" />
+          <h2 className={`${titleFont.className} text-base font-extrabold text-white`}>Resumen del Pedido</h2>
+        </div>
 
-      <h2 className="mb-2 text-2xl">Resumen de orden</h2>
+        <div className="mt-3 space-y-2 text-xs">
+          <div className="text-on-surface-variant flex justify-between">
+            <span>Productos ({itemsInCart}):</span>
+            <span className="font-semibold text-white">
+              {itemsInCart === 1 ? '1 artículo' : `${itemsInCart} artículos`}
+            </span>
+          </div>
 
-      <div className="grid grid-cols-2">
-        <span>No. Productos</span>
-        <span className="text-right">{itemsInCart === 1 ? '1 articulo' : `${itemsInCart} articulos`}</span>
+          <div className="text-on-surface-variant flex justify-between">
+            <span>Subtotal:</span>
+            <span className="font-semibold text-white">{currencyFormat(subTotal)}</span>
+          </div>
 
-        <span>Subtotal</span>
-        <span className="text-right">{currencyFormat(subTotal)}</span>
+          <div className="text-on-surface-variant flex justify-between">
+            <span>Impuestos (IVA):</span>
+            <span className="font-semibold text-white">{currencyFormat(tax)}</span>
+          </div>
 
-        <span>Impuestos (15%)</span>
-        <span className="text-right">{currencyFormat(tax)}</span>
-
-        <span className="mt-5 text-2xl">Total:</span>
-        <span className="mt-5 text-right text-2xl">{currencyFormat(total)}</span>
+          <div className="border-surface-highest border-t pt-3">
+            <div className="flex items-baseline justify-between">
+              <span className="text-sm font-extrabold tracking-wider text-white uppercase">Total:</span>
+              <span className="text-primary-fixed text-2xl font-black">{currencyFormat(total)}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="mt-5 mb-2 w-full">
-        <p className="mb-5">
-          {/* Disclaimer */}
-          <span className="text-xs">
-            Al hacer clic en Colocar orden, aceptas nuestros{' '}
-            <a
-              href="#"
-              className="underline"
-            >
-              términos y condiciones
-            </a>{' '}
-            y{' '}
-            <a
-              href="#"
-              className="underline"
-            >
-              política de privacidad
-            </a>
-          </span>
+      {/* CTA Button and Disclaimer */}
+      <div className="space-y-3 pt-2">
+        <p className="text-on-surface-variant text-[11px] leading-relaxed">
+          Al confirmar tu pedido, aceptas los{' '}
+          <a
+            href="#"
+            className="hover:text-primary-fixed font-bold text-white underline"
+          >
+            Términos de servicio
+          </a>{' '}
+          de Apex Padel.
         </p>
-        <p className="text-red-500">{errorMessage}</p>
+
+        {errorMessage && (
+          <div className="rounded-xl border border-red-800 bg-red-950/60 p-3.5 text-xs font-semibold text-red-300">
+            {errorMessage}
+          </div>
+        )}
+
         <button
           onClick={onPlaceOrder}
-          className={clsx({
+          disabled={isPlacingOrder}
+          className={clsx('w-full py-4 text-xs font-extrabold tracking-wider uppercase shadow-xl', {
             'btn-primary': !isPlacingOrder,
             'btn-disabled': isPlacingOrder,
           })}
         >
-          Colocar orden
+          {isPlacingOrder ? 'PROCESANDO PEDIDO...' : 'CONFIRMAR Y REALIZAR PEDIDO'}
         </button>
+
+        <div className="text-on-surface-variant flex items-center justify-center space-x-2 text-[11px]">
+          <IoLockClosedOutline className="text-primary-fixed h-4 w-4" />
+          <span>Pago Seguro Encriptado</span>
+        </div>
       </div>
     </div>
   )

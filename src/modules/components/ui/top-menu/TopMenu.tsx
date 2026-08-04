@@ -1,9 +1,9 @@
 'use client'
-import { useSyncExternalStore } from 'react'
 
-import { mainFont } from '@/modules/config/fonts'
+import { useSyncExternalStore } from 'react'
 import Link from 'next/link'
-import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
+import { IoCartOutline, IoMenuOutline, IoSearchOutline } from 'react-icons/io5'
+import { titleFont } from '@/modules/config/fonts'
 import { useCartStore, useUIStore } from '@/modules/store'
 
 export const TopMenu = () => {
@@ -17,66 +17,77 @@ export const TopMenu = () => {
   )
 
   return (
-    <nav className={`${mainFont.className} flex w-full items-center justify-between px-5`}>
-      {/* Logo */}
-      <div>
-        <Link href="/">
-          <span className={`${mainFont.className} font-bold antialiased`}>Teslo</span>
-          <span> | Shop</span>
-        </Link>
-      </div>
+    <header className="glass-panel-dark fixed top-0 z-50 w-full shadow-lg">
+      <nav className="app-container flex h-16 items-center justify-between">
+        {/* Left: Menu Trigger & Logo */}
+        <div className="flex items-center space-x-3">
+          <button
+            className="text-on-surface hover:bg-surface-container flex h-11 w-11 items-center justify-center rounded-xl transition-colors"
+            onClick={openMenu}
+            aria-label="Abrir menú"
+          >
+            <IoMenuOutline className="h-6 w-6" />
+          </button>
 
-      {/* Center Menú */}
-      <div className="hidden sm:block">
-        <Link
-          className="m-2 rounded-md p-2 transition-all hover:bg-gray-100"
-          href="/gender/men"
-        >
-          Hombres
-        </Link>
-        <Link
-          className="m-2 rounded-md p-2 transition-all hover:bg-gray-100"
-          href="/gender/women"
-        >
-          Mujeres
-        </Link>
-        <Link
-          className="m-2 rounded-md p-2 transition-all hover:bg-gray-100"
-          href="/gender/kid"
-        >
-          Niños
-        </Link>
-      </div>
+          <Link
+            href="/"
+            className="group flex items-center space-x-2"
+          >
+            <div className="bg-primary-fixed text-on-primary-fixed flex h-8 w-8 items-center justify-center rounded-lg transition-transform group-hover:scale-105">
+              <span className={`${titleFont.className} text-lg font-black tracking-tighter`}>A</span>
+            </div>
+            <span className={`${titleFont.className} text-lg font-extrabold tracking-tight text-white`}>
+              APEX<span className="text-primary-fixed">PADEL</span>
+            </span>
+          </Link>
+        </div>
 
-      {/* Search, Cart, Menu */}
-      <div className="flex items-center">
-        <Link
-          href="/search"
-          className="mx-2"
-        >
-          <IoSearchOutline className="w-5" />
-        </Link>
-        <Link
-          href={totalItemsInCart === 0 && loaded ? '/empty' : '/cart'}
-          className="mx-2"
-        >
-          <div className="relative">
+        {/* Center: Navigation Links */}
+        <div className="hidden items-center space-x-1 md:flex">
+          <Link
+            className="text-on-surface hover:text-primary-fixed rounded-lg px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors"
+            href="/gender/men"
+          >
+            Hombre
+          </Link>
+          <Link
+            className="text-on-surface hover:text-primary-fixed rounded-lg px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors"
+            href="/gender/women"
+          >
+            Mujer
+          </Link>
+          <Link
+            className="text-on-surface hover:text-primary-fixed rounded-lg px-4 py-2 text-xs font-bold tracking-wider uppercase transition-colors"
+            href="/gender/kid"
+          >
+            Junior
+          </Link>
+        </div>
+
+        {/* Right: Search & Cart */}
+        <div className="flex items-center space-x-2">
+          <Link
+            href="/search"
+            className="text-on-surface hover:bg-surface-container flex h-11 w-11 items-center justify-center rounded-xl transition-colors"
+            aria-label="Buscar"
+          >
+            <IoSearchOutline className="h-5 w-5" />
+          </Link>
+
+          <Link
+            href={totalItemsInCart === 0 && loaded ? '/empty' : '/cart'}
+            className="text-on-surface hover:bg-surface-container relative flex h-11 w-11 items-center justify-center rounded-xl transition-colors"
+            aria-label="Carrito"
+          >
+            <IoCartOutline className="h-6 w-6" />
             {loaded && totalItemsInCart > 0 && (
-              <span className="fade-in text-sx absolute -top-2 -right-2 rounded-full bg-blue-700 px-1 font-bold text-white">
+              <span className="fade-in bg-primary-fixed text-on-primary-fixed absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-black shadow-md">
                 {totalItemsInCart}
               </span>
             )}
-            <IoCartOutline className="w-5" />
-          </div>
-        </Link>
-
-        <button
-          className="m-2 rounded-md p-2 transition-all hover:bg-gray-100"
-          onClick={openMenu}
-        >
-          Menú
-        </button>
-      </div>
-    </nav>
+          </Link>
+        </div>
+      </nav>
+    </header>
   )
 }

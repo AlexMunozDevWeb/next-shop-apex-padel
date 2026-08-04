@@ -60,7 +60,6 @@ export const ProductForm = ({ product, categories }: Props) => {
 
   const onSubmit = async (data: FormInputs) => {
     const formData = new FormData()
-
     const { images, ...productToSave } = data
 
     if (product.id) {
@@ -86,7 +85,7 @@ export const ProductForm = ({ product, categories }: Props) => {
     const { ok, product: updatedProduct } = await createUpdateProduct(formData)
 
     if (!ok) {
-      alert('Producto no se pudo actualizar')
+      alert('El producto no se pudo actualizar')
       return
     }
 
@@ -96,145 +95,169 @@ export const ProductForm = ({ product, categories }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mb-16 grid grid-cols-1 gap-3 px-5 sm:grid-cols-2 sm:px-0"
+      className="space-y-8 rounded-2xl border border-[#e3e2e7] bg-white p-6 shadow-sm sm:p-8"
     >
-      {/* Textos */}
-      <div className="w-full">
-        <div className="mb-2 flex flex-col">
-          <span>Título</span>
-          <input
-            type="text"
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('title', { required: true })}
-          />
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Slug</span>
-          <input
-            type="text"
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('slug', { required: true })}
-          />
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Descripción</span>
-          <textarea
-            rows={5}
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('description', { required: true })}
-          ></textarea>
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Price</span>
-          <input
-            type="number"
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('price', { required: true, min: 0 })}
-          />
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Tags</span>
-          <input
-            type="text"
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('tags', { required: true })}
-          />
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Gender</span>
-          <select
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('gender', { required: true })}
-          >
-            <option value="">[Seleccione]</option>
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="kid">Kid</option>
-            <option value="unisex">Unisex</option>
-          </select>
-        </div>
-
-        <div className="mb-2 flex flex-col">
-          <span>Categoria</span>
-          <select
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('categoryId', { required: true })}
-          >
-            <option value="">[Seleccione]</option>
-            {categories.map((category) => (
-              <option
-                key={category.id}
-                value={category.id}
-              >
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button className="btn-primary w-full">Guardar</button>
-      </div>
-
-      {/* Selector de tallas y fotos */}
-      <div className="w-full">
-        <div className="mb-2 flex flex-col">
-          <span>Inventario</span>
-          <input
-            type="number"
-            className="rounded-md border bg-gray-200 p-2"
-            {...register('inStock', { required: true, min: 0 })}
-          />
-        </div>
-
-        {/* As checkboxes */}
-        <div className="flex flex-col">
-          <span>Tallas</span>
-          <div className="flex flex-wrap">
-            {sizes.map((size) => (
-              // bg-blue-500 text-white <--- si está seleccionado
-              <div
-                key={size}
-                onClick={() => onSizeChanged(size)}
-                className={clsx('mr-2 mb-2 w-14 cursor-pointer rounded-md border p-2 text-center transition-all', {
-                  'bg-blue-500 text-white': getValues('sizes').includes(size),
-                })}
-              >
-                <span>{size}</span>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Left Column: Product Information */}
+        <div className="space-y-4">
+          <div className="flex flex-col space-y-1.5">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Título del Producto</label>
+            <input
+              type="text"
+              placeholder="Ej. Pala Apex Pro Carbon 2026"
+              className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+              {...register('title', { required: true })}
+            />
           </div>
 
-          <div className="mb-2 flex flex-col">
-            <span>Fotos</span>
+          <div className="flex flex-col space-y-1.5">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Slug URL</label>
+            <input
+              type="text"
+              placeholder="pala-apex-pro-carbon-2026"
+              className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+              {...register('slug', { required: true })}
+            />
+          </div>
+
+          <div className="flex flex-col space-y-1.5">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Descripción</label>
+            <textarea
+              rows={5}
+              placeholder="Detalles técnicos y especificaciones..."
+              className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+              {...register('description', { required: true })}
+            ></textarea>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Precio (€)</label>
+              <input
+                type="number"
+                step="0.01"
+                placeholder="249.99"
+                className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+                {...register('price', { required: true, min: 0 })}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Etiquetas (Tags)</label>
+              <input
+                type="text"
+                placeholder="palas, pro, carbon"
+                className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+                {...register('tags', { required: true })}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Género / Categoría</label>
+              <select
+                className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+                {...register('gender', { required: true })}
+              >
+                <option value="">[Seleccione]</option>
+                <option value="men">Hombre</option>
+                <option value="women">Mujer</option>
+                <option value="kid">Junior</option>
+                <option value="unisex">Unisex</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Tipo de Producto</label>
+              <select
+                className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+                {...register('categoryId', { required: true })}
+              >
+                <option value="">[Seleccione]</option>
+                {categories.map((category) => (
+                  <option
+                    key={category.id}
+                    value={category.id}
+                  >
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Inventory & Images */}
+        <div className="space-y-4">
+          <div className="flex flex-col space-y-1.5">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Inventario en Stock</label>
+            <input
+              type="number"
+              placeholder="10"
+              className="rounded-lg border border-[#e3e2e7] bg-white p-2.5 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none"
+              {...register('inStock', { required: true, min: 0 })}
+            />
+          </div>
+
+          {/* Sizes Selection */}
+          <div className="flex flex-col space-y-1.5">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Tallas Disponibles</label>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {sizes.map((size) => (
+                <button
+                  type="button"
+                  key={size}
+                  onClick={() => onSizeChanged(size)}
+                  className={clsx(
+                    'flex h-10 min-w-[42px] cursor-pointer items-center justify-center rounded-lg border text-xs font-bold transition-all',
+                    {
+                      'border-black bg-black text-[#c1f100] shadow-sm': getValues('sizes').includes(size),
+                      'border-[#e3e2e7] bg-white text-[#1a1b1f] hover:border-black': !getValues('sizes').includes(size),
+                    }
+                  )}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Image Upload */}
+          <div className="flex flex-col space-y-1.5 pt-2">
+            <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">
+              Subir Imágenes de Producto
+            </label>
             <input
               type="file"
               {...register('images')}
               multiple
-              className="rounded-md border bg-gray-200 p-2"
+              className="rounded-lg border border-[#e3e2e7] bg-[#f4f3f8] p-2.5 text-xs text-[#1a1b1f]"
               accept="image/png, image/jpeg, image/avif"
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {/* Images Grid */}
+          <div className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-3">
             {product.ProductImage?.map((image) => (
-              <div key={image.id}>
-                <ProductImage
-                  alt={product.title ?? ''}
-                  src={image.url}
-                  width={300}
-                  height={300}
-                  className="rounded-t shadow-md"
-                />
+              <div
+                key={image.id}
+                className="overflow-hidden rounded-xl border border-[#e3e2e7] bg-white"
+              >
+                <div className="h-28 w-full bg-[#f4f3f8]">
+                  <ProductImage
+                    alt={product.title ?? ''}
+                    src={image.url}
+                    width={200}
+                    height={200}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
 
                 <button
                   type="button"
                   onClick={() => deleteProductImage(image.id, image.url)}
-                  className="btn-danger w-full rounded-b-xl"
+                  className="w-full bg-red-600 py-1.5 text-[11px] font-bold text-white transition-colors hover:bg-red-700"
                 >
                   Eliminar
                 </button>
@@ -242,6 +265,15 @@ export const ProductForm = ({ product, categories }: Props) => {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="border-t border-[#f4f3f8] pt-4">
+        <button
+          type="submit"
+          className="btn-primary w-full py-3.5 text-xs tracking-wider uppercase"
+        >
+          Guardar Cambios de Producto
+        </button>
       </div>
     </form>
   )

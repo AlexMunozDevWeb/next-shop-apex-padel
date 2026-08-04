@@ -1,16 +1,18 @@
-import { mainFont } from '@/modules/config/fonts'
+import { titleFont } from '@/modules/config/fonts'
 
 interface Props {
   title: string
   subtitle?: string
-  className: string
+  className?: string
 }
 
-export const Title = ({ title, subtitle, className }: Props) => {
+export const Title = ({ title, subtitle, className = '' }: Props) => {
   return (
-    <div className={`mt-3 ${className}`}>
-      <h1 className={`${mainFont} my-7 text-4xl font-semibold antialiased`}>{title}</h1>
-      {subtitle && <h3 className="mb-5 text-xl">{subtitle}</h3>}
+    <div className={`mt-4 mb-6 ${className}`}>
+      <h1 className={`${titleFont.className} text-3xl font-extrabold tracking-tight text-[#1a1b1f] sm:text-4xl`}>
+        {title}
+      </h1>
+      {subtitle && <p className="mt-1.5 text-sm font-medium text-[#4c4546]">{subtitle}</p>}
     </div>
   )
 }
