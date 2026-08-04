@@ -1,65 +1,104 @@
 @import 'tailwindcss';
 
-:root {
-  --primary: #274494;
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@theme {
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #3a3939;
+  --color-surface-lowest: #0e0e0e;
+  --color-surface-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-high: #2a2a2a;
+  --color-surface-highest: #353534;
+
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #c5c9ac;
+
+  --color-primary-fixed: #caf300;
+  --color-on-primary-fixed: #171e00;
+
+  --color-outline-variant: #444932;
+
+  --font-manrope: var(--font-manrope), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
 }
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
+
+:root {
+  --background: #131313;
+  --foreground: #e5e2e1;
+}
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-start-rgb))) rgb(var(--background-end-rgb));
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family:
+    var(--font-manrope),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-title {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 @keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
+    transform: translateY(4px);
   }
-  100% {
+  to {
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .fade-in {
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Glassmorphism Dark Utility */
+.glass-panel-dark {
+  background: rgba(19, 19, 19, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(53, 53, 52, 0.6);
+}
+
+/* Stitch Design System Buttons (Dark Theme) */
 .btn-primary {
-  @apply rounded bg-blue-600 px-4 py-2 text-white transition-all hover:bg-blue-800;
+  @apply inline-flex items-center justify-center rounded-xl bg-[#caf300] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#171e00] uppercase shadow-xl transition-all hover:bg-[#b0d500] active:scale-[0.98];
 }
 
 .btn-secondary {
-  @apply rounded bg-gray-200 px-4 py-2 text-black transition-all hover:bg-gray-300;
+  @apply inline-flex items-center justify-center rounded-xl bg-[#353534] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase shadow-md transition-all hover:bg-[#454747] active:scale-[0.98];
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-xl border border-[#353534] bg-transparent px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#e5e2e1] uppercase transition-all hover:border-[#caf300] hover:text-[#caf300] active:scale-[0.98];
 }
 
 .btn-disabled {
-  @apply rounded bg-gray-600 px-4 py-2 text-white transition-all;
+  @apply pointer-events-none inline-flex cursor-not-allowed items-center justify-center rounded-xl bg-[#201f1f] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-[#454747] uppercase;
 }
 
 .btn-danger {
-  @apply bg-red-500 px-4 py-2 text-white transition-all hover:bg-red-700;
+  @apply inline-flex items-center justify-center rounded-xl bg-[#93000a] px-6 py-3.5 font-sans text-xs font-extrabold tracking-wider text-white uppercase transition-all hover:bg-[#690005] active:scale-[0.98];
+}
+
+/* Custom Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
