@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import { useCartStore } from '@/modules/store'
-import { currencyFormat } from '@/modules/shared/utils'
+import { currencyFormat } from '@/modules/shared/ui/utils'
 import { titleFont } from '@/modules/config/fonts'
 
 export const ProductsInCart = () => {

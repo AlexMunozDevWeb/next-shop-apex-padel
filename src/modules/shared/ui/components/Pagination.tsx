@@ -1,6 +1,6 @@
 'use client'
 
-import { generatePaginationNumbers } from '@/modules/shared/utils'
+import { generatePaginationNumbers } from '@/modules/shared/ui/utils'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'

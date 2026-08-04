@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from 'react'
 import { useShallow } from 'zustand/shallow'
 import { useCartStore } from '@/modules/store'
-import { currencyFormat } from '@/modules/shared/utils'
+import { currencyFormat } from '@/modules/shared/ui/utils'
 
 export const OrderSummary = () => {
   const loaded = useSyncExternalStore(

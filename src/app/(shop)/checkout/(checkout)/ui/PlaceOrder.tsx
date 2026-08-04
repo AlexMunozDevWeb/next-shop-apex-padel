@@ -2,7 +2,7 @@
 
 import { placeOrder } from '@/modules/order/controller/orderActions'
 import { useAddressStore, useCartStore } from '@/modules/store'
-import { currencyFormat } from '@/modules/shared/utils'
+import { currencyFormat } from '@/modules/shared/ui/utils'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useState, useSyncExternalStore } from 'react'

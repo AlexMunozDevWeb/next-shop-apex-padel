@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { IoTrashOutline } from 'react-icons/io5'
 import { useCartStore } from '@/modules/store'
 import { QuantitySelector } from '@/modules/components'
-import { currencyFormat } from '@/modules/shared/utils'
+import { currencyFormat } from '@/modules/shared/ui/utils'
 import { titleFont } from '@/modules/config/fonts'
 
 export const ProductsInCart = () => {
