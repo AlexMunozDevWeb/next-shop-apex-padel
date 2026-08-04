@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ProductsInCart } from './ui/ProductsInCart'
-import { PlaceOrder } from './ui/PlaceOrder'
+import { ProductsInCart } from '../../../../modules/payments/ui/components/ProductsInCart'
+import { PlaceOrder } from '../../../../modules/payments/ui/components/PlaceOrder'
 import { titleFont } from '@/modules/config/fonts'
 import { IoPencilOutline } from 'react-icons/io5'
 

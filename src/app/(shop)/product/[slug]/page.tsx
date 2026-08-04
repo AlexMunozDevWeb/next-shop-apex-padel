@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { titleFont } from '@/modules/config/fonts'
 import { ProductMobileSlideshow, ProductSlideshow } from '@/modules/products/ui/components'
 import { getProductoBySlug } from '@/modules/products/controller/productActions'
-import { AddToCart } from './ui/AddToCart'
+import { AddToCart } from '../../../../modules/products/ui/components/product/AddToCart'
 import { IoArrowBackOutline, IoStar } from 'react-icons/io5'
 import Link from 'next/link'
 

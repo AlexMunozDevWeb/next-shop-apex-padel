@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { titleFont } from '@/modules/config/fonts'
-import { LoginForm } from './ui/LoginForm'
+import { LoginForm } from '../../../modules/auth/ui/components/LoginForm'
 
 export default function LoginPage() {
   return (

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { titleFont } from '@/modules/config/fonts'
-import { RegisterForm } from './ui/RegisterForm'
+import { RegisterForm } from '../../../modules/user/ui/components/RegisterForm'
 
 export default function NewAccount() {
   return (
