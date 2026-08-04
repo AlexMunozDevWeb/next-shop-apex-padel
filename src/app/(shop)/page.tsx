@@ -2,7 +2,8 @@ export const revalidate = 60
 
 import { getPaginatedProductWithImages } from '@/modules/products/controller/productActions'
 import { redirect } from 'next/navigation'
-import { ProductGrid, Pagination } from '@/modules/components'
+import { Pagination } from '@/modules/shared/ui/components'
+import { ProductGrid } from '@/modules/products/ui/components'
 import { titleFont } from '@/modules/config/fonts'
 import Link from 'next/link'
 import {

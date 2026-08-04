@@ -3,7 +3,8 @@ export const revalidate = 60
 import { getPaginatedProductWithImages } from '@/modules/products/controller/productActions'
 import { redirect } from 'next/navigation'
 import { Gender } from '@/generated/prisma/enums'
-import { Pagination, ProductGrid } from '@/modules/components'
+import { Pagination } from '@/modules/shared/ui/components'
+import { ProductGrid } from '@/modules/products/ui/components'
 import { titleFont } from '@/modules/config/fonts'
 
 interface Props {

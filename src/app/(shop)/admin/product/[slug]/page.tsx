@@ -1,5 +1,5 @@
 import { getProductoBySlug } from '@/modules/products/controller/productActions'
-import { Title } from '@/modules/components'
+import { Title } from '@/modules/shared/ui/components'
 import { redirect } from 'next/navigation'
 import { ProductForm } from './ui/ProductForm'
 import { implementCategoryController } from '@/modules/category/controller/categoryController'

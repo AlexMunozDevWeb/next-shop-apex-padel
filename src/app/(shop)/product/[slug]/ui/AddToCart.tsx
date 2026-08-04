@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { QuantitySelector, SizeSelector } from '@/modules/components'
+import { QuantitySelector, SizeSelector } from '@/modules/products/ui/components'
 import type { CartProduct, Product, Size } from '@/modules/products/domain'
 import { useCartStore } from '@/modules/store'
 import { IoBagHandleOutline, IoCheckmarkCircleOutline, IoFlashOutline } from 'react-icons/io5'

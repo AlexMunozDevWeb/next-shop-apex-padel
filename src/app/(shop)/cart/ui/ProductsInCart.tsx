@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { IoTrashOutline } from 'react-icons/io5'
 import { useCartStore } from '@/modules/store'
-import { QuantitySelector } from '@/modules/components'
+import { QuantitySelector } from '@/modules/products/ui/components'
 import { currencyFormat } from '@/modules/shared/ui/utils'
 import { titleFont } from '@/modules/config/fonts'
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { mainFont, titleFont } from '@/modules/config/fonts'
-import { Providers } from '@/modules/components'
+import { Providers } from '@/modules/payments/ui/providers/Provider'
 
 export const metadata: Metadata = {
   title: {

@@ -3,7 +3,7 @@ export const revalidate = 608400 // 7 días
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 import { titleFont } from '@/modules/config/fonts'
-import { ProductMobileSlideshow, ProductSlideshow } from '@/modules/components'
+import { ProductMobileSlideshow, ProductSlideshow } from '@/modules/products/ui/components'
 import { getProductoBySlug } from '@/modules/products/controller/productActions'
 import { AddToCart } from './ui/AddToCart'
 import { IoArrowBackOutline, IoStar } from 'react-icons/io5'

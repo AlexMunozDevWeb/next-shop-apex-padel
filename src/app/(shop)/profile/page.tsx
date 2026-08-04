@@ -1,5 +1,5 @@
 import { auth } from '@/auth.config'
-import { Title } from '@/modules/components'
+import { Title } from '@/modules/shared/ui/components'
 import { redirect } from 'next/navigation'
 import { titleFont } from '@/modules/config/fonts'
 import { IoMailOutline, IoPersonOutline, IoShieldCheckmarkOutline, IoSparklesOutline } from 'react-icons/io5'

@@ -1,6 +1,6 @@
 export const revalidate = 0
 
-import { Pagination, Title } from '@/modules/components'
+import { Pagination, Title } from '@/modules/shared/ui/components'
 import { redirect } from 'next/navigation'
 import { UsersTable } from './ui/UsersTable'
 import { serverUserController } from '@/modules/user/controller/serverUserController'

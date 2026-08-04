@@ -1,7 +1,7 @@
 export const revalidate = 0
 
 import { getOrdersByUser } from '@/modules/order/controller/orderActions'
-import { Title } from '@/modules/components'
+import { Title } from '@/modules/shared/ui/components'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { IoCardOutline, IoChevronForwardOutline } from 'react-icons/io5'

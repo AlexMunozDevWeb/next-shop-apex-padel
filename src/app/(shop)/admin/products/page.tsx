@@ -1,7 +1,8 @@
 export const revalidate = 0
 
 import { getPaginatedProductWithImages } from '@/modules/products/controller/productActions'
-import { Pagination, ProductImage, Title } from '@/modules/components'
+import { Pagination, Title } from '@/modules/shared/ui/components'
+import { ProductImage } from '@/modules/products/ui/components'
 import { currencyFormat } from '@/modules/shared/ui/utils'
 import Link from 'next/link'
 import { IoAddOutline } from 'react-icons/io5'

@@ -1,4 +1,4 @@
-import { TopMenu, Sidebar, Footer } from '@/modules/components'
+import { TopMenu, Sidebar, Footer } from '@/modules/shared/ui/components'
 
 export default function ShopLayout({ children }: { children: React.ReactNode }) {
   return (

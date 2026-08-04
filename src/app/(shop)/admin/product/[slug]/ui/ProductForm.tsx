@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import { createUpdateProduct, deleteProductImage } from '@/modules/products/controller/productActions'
 import { Product, ProductImage as ProductWithImage } from '@/modules/products/domain'
 import type { Category } from '@/modules/category/domain'
-import { ProductImage } from '@/modules/components'
+import { ProductImage } from '@/modules/products/ui/components'
 
 interface Props {
   product: Partial<Product> & { ProductImage?: ProductWithImage[] }
