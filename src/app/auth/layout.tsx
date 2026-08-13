@@ -9,8 +9,8 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <main className="flex justify-center">
-      <div className="w-full px-10 sm:w-[350px]">{children}</div>
+    <main className="bg-surface text-on-surface flex min-h-screen w-full items-center justify-center">
+      <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-8">{children}</div>
     </main>
   )
 }

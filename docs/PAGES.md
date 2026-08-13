@@ -5,7 +5,6 @@
 | Ruta                | Archivo                                       |
 | ------------------- | --------------------------------------------- |
 | `/`                 | `src/app/(shop)/page.tsx`                     |
-| `/products`         | `src/app/(shop)/products/page.tsx`            |
 | `/product/[slug]`   | `src/app/(shop)/product/[slug]/page.tsx`      |
 | `/gender/[gender]`  | `src/app/(shop)/gender/[gender]/page.tsx`     |
 | `/cart`             | `src/app/(shop)/cart/page.tsx`                |
@@ -27,10 +26,9 @@
 
 | Ruta                    | Archivo                                        |
 | ----------------------- | ---------------------------------------------- |
-| `/admin`                | `src/app/(shop)/admin/page.tsx`                |
 | `/admin/products`       | `src/app/(shop)/admin/products/page.tsx`       |
 | `/admin/product/[slug]` | `src/app/(shop)/admin/product/[slug]/page.tsx` |
 | `/admin/orders`         | `src/app/(shop)/admin/orders/page.tsx`         |
 | `/admin/users`          | `src/app/(shop)/admin/users/page.tsx`          |
 
-**Total: 18 páginas**
+**Total: 16 páginas**

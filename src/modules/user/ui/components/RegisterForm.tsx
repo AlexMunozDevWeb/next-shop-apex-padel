@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { IoAlertCircleOutline } from 'react-icons/io5'
+import { IoAlertCircleOutline, IoLockClosedOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5'
 
 type FormInputs = {
   name: string
@@ -44,66 +44,105 @@ export const RegisterForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-4"
     >
-      <div className="flex flex-col space-y-1.5">
-        <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Nombre Completo</label>
-        <input
-          className={clsx(
-            'rounded-lg border bg-white p-3 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none',
-            {
-              'border-red-500': !!errors.name,
-              'border-[#e3e2e7]': !errors.name,
-            }
-          )}
-          type="text"
-          placeholder="Ej. Carlos Alcaraz"
-          autoFocus
-          {...register('name', { required: true })}
-        />
+      {/* Name Input */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+          Nombre Completo
+        </label>
+        <div className="relative">
+          <IoPersonOutline className="text-on-surface-variant absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
+          <input
+            className={clsx(
+              'border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed w-full rounded-xl border py-3.5 pr-4 pl-12 text-xs transition-colors focus:outline-none',
+              {
+                'border-red-500': !!errors.name,
+              }
+            )}
+            type="text"
+            placeholder="Ej. Carlos Alcaraz"
+            autoFocus
+            {...register('name', { required: true })}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col space-y-1.5">
-        <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Correo Electrónico</label>
-        <input
-          className={clsx(
-            'rounded-lg border bg-white p-3 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none',
-            {
-              'border-red-500': !!errors.email,
-              'border-[#e3e2e7]': !errors.email,
-            }
-          )}
-          type="email"
-          placeholder="tu@email.com"
-          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-        />
+      {/* Email Input */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+          Correo Electrónico
+        </label>
+        <div className="relative">
+          <IoMailOutline className="text-on-surface-variant absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
+          <input
+            className={clsx(
+              'border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed w-full rounded-xl border py-3.5 pr-4 pl-12 text-xs transition-colors focus:outline-none',
+              {
+                'border-red-500': !!errors.email,
+              }
+            )}
+            type="email"
+            placeholder="tu@email.com"
+            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col space-y-1.5">
-        <label className="text-xs font-bold tracking-wider text-[#4c4546] uppercase">Contraseña</label>
+      {/* Password Input */}
+      <div className="flex flex-col space-y-2">
+        <label className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+          Contraseña
+        </label>
+        <div className="relative">
+          <IoLockClosedOutline className="text-on-surface-variant absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
+          <input
+            className={clsx(
+              'border-surface-highest bg-surface-high text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary-fixed w-full rounded-xl border py-3.5 pr-4 pl-12 text-xs transition-colors focus:outline-none',
+              {
+                'border-red-500': !!errors.password,
+              }
+            )}
+            type="password"
+            placeholder="Mínimo 6 caracteres"
+            {...register('password', { required: true, minLength: 6 })}
+          />
+        </div>
+      </div>
+
+      {/* Terms & Conditions Checkbox */}
+      <div className="flex items-start space-x-2 pt-1">
         <input
-          className={clsx(
-            'rounded-lg border bg-white p-3 text-sm text-[#1a1b1f] transition-colors focus:border-black focus:outline-none',
-            {
-              'border-red-500': !!errors.password,
-              'border-[#e3e2e7]': !errors.password,
-            }
-          )}
-          type="password"
-          placeholder="Mínimo 6 caracteres"
-          {...register('password', { required: true, minLength: 6 })}
+          type="checkbox"
+          id="terms"
+          required
+          className="bg-surface-high border-surface-highest accent-primary-fixed mt-0.5 h-4 w-4 cursor-pointer rounded border"
         />
+        <label
+          htmlFor="terms"
+          className="text-on-surface-variant cursor-pointer text-xs leading-tight"
+        >
+          Acepto los{' '}
+          <a
+            href="#"
+            className="text-primary-fixed font-semibold hover:underline"
+          >
+            Términos y Condiciones
+          </a>{' '}
+          y la Política de Privacidad.
+        </label>
       </div>
 
       {errorMessage && (
-        <div className="fade-in flex items-center space-x-2 rounded-lg border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-600">
+        <div className="fade-in flex items-center space-x-2 rounded-xl border border-red-800 bg-red-950/60 p-3 text-xs font-semibold text-red-300">
           <IoAlertCircleOutline className="h-5 w-5 flex-shrink-0" />
           <span>{errorMessage}</span>
         </div>
       )}
 
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className={clsx('w-full py-3 text-xs font-extrabold tracking-wider uppercase', {
+        className={clsx('w-full py-4 text-xs font-extrabold tracking-wider uppercase shadow-lg', {
           'btn-primary': !isSubmitting,
           'btn-disabled': isSubmitting,
         })}
@@ -111,18 +150,42 @@ export const RegisterForm = () => {
         {isSubmitting ? 'Creando cuenta...' : 'Registrarme'}
       </button>
 
+      {/* Divider */}
       <div className="my-6 flex items-center space-x-3">
-        <div className="h-px flex-1 bg-[#e3e2e7]" />
-        <span className="text-[11px] font-bold tracking-widest text-[#4c4546] uppercase">o</span>
-        <div className="h-px flex-1 bg-[#e3e2e7]" />
+        <div className="bg-surface-highest h-px flex-1" />
+        <span className="text-on-surface-variant text-[10px] font-extrabold tracking-widest uppercase">
+          O continúa con
+        </span>
+        <div className="bg-surface-highest h-px flex-1" />
       </div>
 
-      <Link
-        href="/auth/login"
-        className="btn-outline w-full text-center text-xs font-bold tracking-wider uppercase"
-      >
-        Ya tengo cuenta - Iniciar Sesión
-      </Link>
+      {/* Social Logins */}
+      <div className="grid grid-cols-2 gap-3">
+        <button
+          type="button"
+          className="bg-surface-high hover:bg-surface-highest flex items-center justify-center space-x-2 rounded-xl py-3 text-xs font-bold text-white transition-colors"
+        >
+          <span>Google</span>
+        </button>
+        <button
+          type="button"
+          className="bg-surface-high hover:bg-surface-highest flex items-center justify-center space-x-2 rounded-xl py-3 text-xs font-bold text-white transition-colors"
+        >
+          <span>Apple</span>
+        </button>
+      </div>
+
+      <div className="pt-2 text-center">
+        <p className="text-on-surface-variant text-xs">
+          ¿Ya tienes cuenta?{' '}
+          <Link
+            href="/auth/login"
+            className="text-primary-fixed ml-1 font-bold hover:underline"
+          >
+            Inicia Sesión
+          </Link>
+        </p>
+      </div>
     </form>
   )
 }
