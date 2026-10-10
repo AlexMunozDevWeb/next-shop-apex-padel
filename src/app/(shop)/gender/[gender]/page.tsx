@@ -52,7 +52,7 @@ export default async function CategoryIdPage({ params, searchParams }: Props) {
     unisex: {
       title: 'Colección Unisex',
       subtitle: 'Accesorios y equipación técnica universal para todos los jugadores.',
-      bgImage: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1200',
+      bgImage: 'https://images.pexels.com/photos/38155778/pexels-photo-38155778.jpeg?auto=compress&cs=tinysrgb&w=1200',
       tag: 'UNIVERSAL EQUIPMENT',
     },
   }
@@ -60,7 +60,7 @@ export default async function CategoryIdPage({ params, searchParams }: Props) {
   const currentMeta = categoryMeta[gender] || {
     title: 'Catálogo de Productos',
     subtitle: 'Equipamiento técnico Apex Padel de grado torneo.',
-    bgImage: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1200',
+    bgImage: 'https://images.pexels.com/photos/38155778/pexels-photo-38155778.jpeg?auto=compress&cs=tinysrgb&w=1200',
     tag: 'APEX STORE',
   }
 

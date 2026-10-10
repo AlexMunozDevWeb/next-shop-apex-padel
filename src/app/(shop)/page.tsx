@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: Props) {
             className="h-full w-full scale-105 bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1600')",
+                "url('https://images.pexels.com/photos/38155778/pexels-photo-38155778.jpeg?auto=compress&cs=tinysrgb&w=1600')",
             }}
           />
           <div className="from-surface via-surface/60 absolute inset-0 bg-gradient-to-t to-transparent" />
