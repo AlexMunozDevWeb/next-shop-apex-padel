@@ -2,6 +2,11 @@
 
 Este es un proyecto de comercio electrónico construido con **Next.js** y **Tailwind CSS v4**, diseñado para ofrecer una experiencia de compra moderna y fluida.
 
+https://next-shop-apex-padel.vercel.app/
+
+<img width="1578" height="708" alt="image" src="https://github.com/user-attachments/assets/1332a3bf-9cf5-478e-b92f-2f1308d57e03" />
+
+
 ## 🚀 Tecnologías Principales
 
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
