@@ -1,5 +1,7 @@
 # Teslo Shop - Next.js
 
+Este es un proyecto de comercio electrónico construido con **Next.js** y **Tailwind CSS v4**, diseñado para ofrecer una experiencia de compra moderna y fluida.
+
 ![Next.js](https://img.shields.io/badge/Next.js-16.2.4-000000?style=flat-square&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=flat-square&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -13,8 +15,6 @@
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat-square&logo=cloudinary&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?style=flat-square&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-3-F7B93E?style=flat-square&logo=prettier&logoColor=white)
-
-Este es un proyecto de comercio electrónico construido con **Next.js** y **Tailwind CSS v4**, diseñado para ofrecer una experiencia de compra moderna y fluida.
 
 **[Demo en Vivo](https://next-shop-apex-padel.vercel.app/)**
 
